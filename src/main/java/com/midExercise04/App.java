@@ -26,22 +26,21 @@ public class App {
 	}
 
 	public static void sortPassengerByAmmountDescending(Passenger[] passengers) {
-		Passenger[] passengerSort = passengers;
-		Passenger temp = passengerSort[0];
+		Passenger temp = passengers[0];
 
 		for (int i = 0; i < passengers.length - 1; i++) {
 			for (int j = i + 1; j < passengers.length; j++) {
-				if (passengerSort[i].tinhTongTien() < passengerSort[j].tinhTongTien()) {
-					temp = passengerSort[j];
-					passengerSort[j] = passengerSort[i];
-					passengerSort[i] = temp;
+				if (passengers[i].tinhTongTien() < passengers[j].tinhTongTien()) {
+					temp = passengers[j];
+					passengers[j] = passengers[i];
+					passengers[i] = temp;
 				}
 			}
 		}
 		System.out.println("Order by passenger descending");
-		for (int i = 0; i < passengerSort.length; i++) {
+		for (int i = 0; i < passengers.length; i++) {
 			System.out.println("Passenger " + (i + 1) + ":");
-			System.out.println(passengerSort[i].toString());
+			System.out.println(passengers[i].toString());
 		}
 	}
 
