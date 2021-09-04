@@ -4,6 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Ticket {
+//	Lớp Ticket:
+//	Thuộc tính: tenChuyen, ngayBay, giaVe
+//	Phương thức:
+//	Khởi tạo rỗng & khởi tạo đầy đủ
+//	Nhập thông tin vé từ console
+//	Xuất thông tin vé thành chuỗi (toString)
+//	getGiaVe(): hàm trả về giá vé
+
 	String tenChuyen;
 	LocalDateTime ngayBay;
 	int giaVe;
@@ -18,46 +26,38 @@ public class Ticket {
 		this.giaVe = giaVe;
 	}
 
-	public void input() {
+	public Ticket input() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Input ticket information: ");
-		System.out.println("Input name: ");
-		String name = sc.nextLine();
-		System.out.println("Input day: ");
+
+		System.out.print("Name:");
+		this.tenChuyen = sc.nextLine();
+		System.out.print("Day: ");
 		int day = sc.nextInt();
+		System.out.print("Month: ");
+		int month = sc.nextInt();
+		System.out.print("Year: ");
+		int year = sc.nextInt();
+		System.out.print("Hour: ");
+		int hour = sc.nextInt();
+		System.out.print("Minute: ");
+		int minute = sc.nextInt();
+		System.out.print("Second: ");
+		int second = sc.nextInt();
 
-		LocalDateTime now = LocalDateTime.now();
-
-		Ticket ticket = new Ticket(name, now, 10000);
-
-		System.out.println(ticket.toString());
+		this.ngayBay = LocalDateTime.of(year, month, day, hour, minute, second);
+		System.out.print("Price: ");
+		this.giaVe = sc.nextInt();
+		return new Ticket(this.tenChuyen, this.ngayBay, this.giaVe);
 
 	}
 
 	@Override
 	public String toString() {
-		return "Name: " + this.tenChuyen + ", Date: " + this.ngayBay + ", Price: " + this.giaVe + ")" + "";
+		return "Name: " + this.tenChuyen + ", Date: " + this.ngayBay + ", Price: " + this.giaVe + "";
 	}
 
 	public int getGiaVe() {
 		return giaVe;
-
-	}
-
-	public static void main(String[] args) {
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input ticket information: ");
-		System.out.println("Input name: ");
-		String name = sc.nextLine();
-		System.out.println("Input day: ");
-		int day = sc.nextInt();
-
-		LocalDateTime now = LocalDateTime.now();
-
-		Ticket ticket = new Ticket(name, now, 10000);
-
-		System.out.println(ticket.toString());
 
 	}
 

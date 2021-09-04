@@ -1,9 +1,20 @@
 package com.midExercise04;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Passenger {
+
+//	Thuộc tính: hoTen, gioiTinh, tuoi, danhSachVe
+//	Phương thức:
+//	Khởi tạo
+//	Nhập thông tin hành khách từ console
+//	Xuất thông tin
+//	tinhTongTien(): trả về tổng số tiền phải trả của hành khách ứng với số vé đã mua
+//	Chương trình chính
+//	Nhập vào 1 danh sách n hành khách (n nhập từ bàn phím).
+//	Hiển thị danh sách hành khách và số tiền phải trả tương ứng của mỗi khách hàng.
+//	Sắp xếp danh sách hành khách theo chiều giảm dần của Tổng tiền.
+//	Hiển thị lại danh sách hành khách và số tiền phải trả tương ứng của mỗi khách hàng.
 
 	String hoTen;;
 	boolean gioiTinh;
@@ -22,40 +33,48 @@ public class Passenger {
 
 	public void input() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Input passenger information: ");
 		System.out.println("Input name: ");
-		String name = sc.nextLine();
+		this.hoTen = sc.nextLine();
 
 		System.out.println("Input gender: ");
-		boolean gender = sc.nextBoolean();
+		this.gioiTinh = sc.nextBoolean();
 
 		System.out.println("Input age: ");
-		int age = sc.nextInt();
-		System.out.println("Input day: ");
-		int day = sc.nextInt();
+		this.tuoi = sc.nextInt();
 
+		System.out.println("Input quantity ticket: ");
+
+		int numberOfTicket = sc.nextInt();
+		Ticket[] ticket = new Ticket[numberOfTicket];
+		System.out.println("Input ticket information: ");
+		for (int i = 0; i < numberOfTicket; i++) {
+			System.out.printf("Input ticket number %d\n", i + 1);
+			ticket[i] = new Ticket();
+			ticket[i].input();
+		}
+		this.danhSachVe = ticket;
 	}
 
 	@Override
 	public String toString() {
-		return "Name: " + this.hoTen + ", Gender: " + this.gioiTinh + ", Age: " + this.tuoi + danhSachVe.toString();
+		String passengerInfor = "\nPassenger Information\nName: " + this.hoTen + ", Gender: " + this.gioiTinh
+				+ ", Age: " + this.tuoi + "\nTicket Information:\n";
+
+		for (Ticket ticket : danhSachVe) {
+			passengerInfor += ticket.toString() + "\n";
+		}
+
+		return passengerInfor;
+
 	}
 
 	public int tinhTongTien() {
-		return tuoi;
+		int sumPrice = 0;
+		for (int i = 0; i < this.danhSachVe.length; i++) {
+			sumPrice += this.danhSachVe[i].getGiaVe();
+		}
+		return sumPrice;
 
 	}
 
-	public static void main(String[] args) {
-
-		LocalDateTime now = LocalDateTime.now();
-		Ticket danhSachVe01 = new Ticket("HCM", now, 150000);
-		Ticket danhSachVe02 = new Ticket("HaNoi", now, 200000);
-		Ticket danhSachVe03 = new Ticket("DaNang", now, 250000);
-
-		Ticket[] ticket = new Ticket[] { danhSachVe01, danhSachVe02, danhSachVe03 };
-
-		Passenger passenger = new Passenger("Vu", false, 20, ticket);
-		System.out.println(passenger);
-	}
 }
