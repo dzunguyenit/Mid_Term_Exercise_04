@@ -26,20 +26,22 @@ public class App {
 	}
 
 	public static void sortPassengerByAmmountDescending(Passenger[] passengers) {
-		Passenger temp = passengers[0];
+		Passenger[] passengerSort = passengers;
+		Passenger temp = passengerSort[0];
+
 		for (int i = 0; i < passengers.length - 1; i++) {
 			for (int j = i + 1; j < passengers.length; j++) {
-				if (passengers[i].tinhTongTien() < passengers[j].tinhTongTien()) {
-					temp = passengers[j];
-					passengers[j] = passengers[i];
-					passengers[i] = temp;
+				if (passengerSort[i].tinhTongTien() < passengerSort[j].tinhTongTien()) {
+					temp = passengerSort[j];
+					passengerSort[j] = passengerSort[i];
+					passengerSort[i] = temp;
 				}
 			}
 		}
 		System.out.println("Order by passenger descending");
-		for (int i = 0; i < passengers.length; i++) {
+		for (int i = 0; i < passengerSort.length; i++) {
 			System.out.println("Passenger " + (i + 1) + ":");
-			System.out.println(passengers[i].toString());
+			System.out.println(passengerSort[i].toString());
 		}
 	}
 
@@ -49,13 +51,12 @@ public class App {
 		int n = sc.nextInt();
 
 		System.out.println("Input information passengers: ");
-		Passenger[] passengersInitial = inputPassengers(n);
-
-		Passenger[] passengers = passengersInitial;
+		Passenger[] passengers = inputPassengers(n);
+		Passenger[] passengersClone = passengers.clone();
 
 //		Hiển thị danh sách hành khách và số tiền phải trả tương ứng của mỗi khách hàng.
 		System.out.println("====================================");
-		printPasssengers(passengersInitial);
+		printPasssengers(passengers);
 
 //		Sắp xếp danh sách hành khách theo chiều giảm dần của Tổng tiền.
 		System.out.println("=====================================");
@@ -63,7 +64,7 @@ public class App {
 
 //		Hiển thị lại danh sách hành khách và số tiền phải trả tương ứng của mỗi khách hàng.
 		System.out.println("=======================================================");
-		printPasssengers(passengersInitial);
+		printPasssengers(passengersClone);
 
 	}
 }
